@@ -86,6 +86,6 @@ def test_kmers_lookup():
     assert (counts == lcounts).all()
 
 
-#@raises(ValueError)
-#def test_non_acgt():
-#    count_kmers('abcdefghijklmnopqrstvwuxyz')
+@raises(Exception)
+def test_non_acgt():
+    count_kmers(1, 'abcdefghijklmnopqrstvwuxyz')

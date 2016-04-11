@@ -91,7 +91,7 @@ def create_kmers_lookup(k, seq):
 
 @cython.boundscheck(False)
 def _create_kmers_lookup(unsigned int k, np.ndarray[np.uint32_t, ndim=1] seqi):
-    cdef np.ndarray[np.uint16_t, ndim=2] counts = np.zeros((len(seqi)+2-<int>k, 4**k), dtype=np.uint16)
+    cdef np.ndarray[np.uint32_t, ndim=2] counts = np.zeros((len(seqi)+2-<int>k, 4**k), dtype=np.uint32)
     cdef np.uint32_t index_mask = 4 ** k - 1
     cdef np.uint32_t index
     cdef np.uint32_t c
@@ -115,6 +115,6 @@ def _create_kmers_lookup(unsigned int k, np.ndarray[np.uint32_t, ndim=1] seqi):
     return np.cumsum(counts, axis=0, dtype=counts.dtype)
 
 
-def count_kmers_lookup(np.ndarray[np.uint16_t, ndim=2] lookup, start, stop):
+def count_kmers_lookup(np.ndarray[np.uint32_t, ndim=2] lookup, start, stop):
     k = int(np.round(np.log(lookup.shape[1]) / np.log(4.)))
     return lookup[stop - k + 1, :] - lookup[start, :]

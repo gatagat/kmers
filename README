@@ -1,6 +1,0 @@
-kmers 0.01 - Cython implementation of DNA k-mer counting
-
-python setup.py build
-python setup.py install
-
-Tomas Kazmar, 2014
